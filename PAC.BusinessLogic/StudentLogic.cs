@@ -14,6 +14,9 @@ public class StudentLogic : IStudentLogic
     {
         _studentsRepository = repository;
     }
+    public StudentLogic()
+    {
+    }
 
     public Student GetStudentById(int id)
     {
