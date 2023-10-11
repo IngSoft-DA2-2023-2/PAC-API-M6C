@@ -35,6 +35,7 @@ namespace PAC.WebAPI
             return result;
         }
 
+        [HttpPost]
         public IActionResult CreateStudent(Student student)
         {
             _studentLogic.InsertStudents(student);
