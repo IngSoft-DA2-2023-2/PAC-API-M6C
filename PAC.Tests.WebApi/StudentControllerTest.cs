@@ -90,7 +90,7 @@ public class StudentControllerTest
                 Name = "Pablo Emilio Escobar Gaviria",
             };
 
-            var result = controller.Create(student) as OkResult;
+            var result = controller.Create(student) as OkObjectResult;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(200, result.StatusCode);
