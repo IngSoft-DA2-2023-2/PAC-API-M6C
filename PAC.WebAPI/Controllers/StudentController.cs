@@ -20,6 +20,7 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
 
+        [HttpPost]
         public void AddStudent(Student aStudent)
         {
             _studentLogic.InsertStudents(aStudent);
