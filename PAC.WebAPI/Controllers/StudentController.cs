@@ -26,5 +26,12 @@ namespace PAC.WebAPI
             var users = _studentLogic.GetStudents();
             return Ok(users);
         }
+        
+        [HttpGet("{id:int}")]
+        public IActionResult GetStudentsById(int id)
+        {
+            var users = _studentLogic.GetStudentById(id);
+            return Ok(users);
+        }
     }
 }
