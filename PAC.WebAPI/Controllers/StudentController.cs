@@ -36,6 +36,18 @@ namespace PAC.WebAPI
             var students = _studentLogic.GetStudents();
             return Ok(students);
         }
+
+        [HttpPost]
+        public IActionResult InsertStudents([FromBody] Student student)
+        {
+            if (student == null)
+            {
+                return BadRequest("Student object is null.");
+            }
+
+            _studentLogic.InsertStudents(student);
+            return Ok();
+        }
     }
 }
 
