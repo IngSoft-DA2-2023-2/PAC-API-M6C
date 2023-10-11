@@ -8,6 +8,7 @@ using PAC.Domain;
 using PAC.WebAPI;
 using Microsoft.AspNetCore.Mvc;
 using PAC.IDataAccess;
+using Castle.Components.DictionaryAdapter.Xml;
 
 [TestClass]
 public class StudentControllerTest
@@ -47,6 +48,21 @@ public class StudentControllerTest
             var result = controller.GetStudentById(1);
             Assert.AreEqual(student, result);
 
+        }
+
+        [TestMethod]
+        public void CreateAStudent()
+        {
+            List<Student> sutdients = new List<Student>();
+            var repo = new Mock<IStudentsRepository<Student>>();
+            repo.Setup(x => x.InsertStudents(It.IsAny<Student>())).Callback((Student newSudent) => sutdients.Add(newSudent));
+            var logic = new Mock<IStudentLogic>();
+            logic.Setup(x => x.InsertStudents(It.IsAny<Student>())).Callback((Student newSudent) => repo.Object.InsertStudents(newSudent));
+
+            var controller = new StudentController(logic.Object);
+            Student aStudent = new Student();
+            var result = controller.AddStudent(aStudent);
+            Assert.IsTrue(sutdients.Count > 0);
         }
     }
 }
