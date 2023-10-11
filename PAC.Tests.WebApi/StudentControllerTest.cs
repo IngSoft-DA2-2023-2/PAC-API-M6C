@@ -40,5 +40,21 @@ public class StudentControllerTest
             studentServiceMock.VerifyAll();
             Assert.IsTrue(students.SequenceEqual(studentList));
         }
+
+        [TestMethod]
+        public void GetIdOkTest()
+        {
+            Student oneStudent = new Student();
+
+            var studentServiceMock = new Mock<IStudentLogic>(MockBehavior.Strict);
+            studentServiceMock.Setup(s => s.GetStudentById(It.IsAny<int>())).Returns(oneStudent);
+            var studentController = new StudentController(studentServiceMock.Object);
+
+            var result = studentController.Get(oneStudent.Id);
+            var okResult = result as ObjectResult;
+            var value = okResult.Value as Student;
+            studentServiceMock.VerifyAll();
+            Assert.AreEqual(value, oneStudent);
+        }
     }
 }
