@@ -19,5 +19,20 @@ namespace PAC.WebAPI
         {
             this._studentLogic = studentLogic;
         }
+
+        public ActionResult<List<Student>> GetAllStudents()
+        {
+            return NotFound();
+        }
+
+        public ActionResult<Student> GetStudentById(int id)
+        {
+            return NotFound();
+        }
+
+        public IActionResult CreateStudent(Student student)
+        {
+            return BadRequest();
+        }
     }
 }
