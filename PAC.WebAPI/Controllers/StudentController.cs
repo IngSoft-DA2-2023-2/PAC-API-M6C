@@ -28,14 +28,17 @@ namespace PAC.WebAPI
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetStudent(long id)
+        public IActionResult GetStudent(int id)
         {
-            return null;
+            return Ok(_studentLogic.GetStudentById(id));
 
         }
 
-
-
+       [HttpPost]
+       public IActionResult Students(Student student)
+        {
+            return null;
+        }
 
     }
 }
