@@ -8,7 +8,10 @@ namespace PAC.WebAPI.Filters
     {
         public virtual void OnAuthorization(AuthorizationFilterContext context)
         {
-            var authorizationHeader = context.HttpContext.Request.Headers[""].ToString();
+            var authorizationHeader = context.HttpContext.Request.Headers["admin"].ToString();
+            if (authorizationHeader == null)
+            {
+            }
         }
 
     }

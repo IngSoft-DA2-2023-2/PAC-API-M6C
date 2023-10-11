@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PAC.Domain;
 using PAC.IBusinessLogic;
+using PAC.WebAPI.Filters;
 
 namespace PAC.WebAPI
 {
@@ -21,6 +22,7 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public void AddStudent(Student aStudent)
         {
             _studentLogic.InsertStudents(aStudent);
