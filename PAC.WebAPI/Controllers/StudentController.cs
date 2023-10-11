@@ -2,6 +2,7 @@
 using PAC.BusinessLogic;
 using PAC.Domain;
 using PAC.IBusinessLogic;
+using PAC.WebAPI.Filters;
 using System.Collections.Generic;
 
 namespace PAC.WebAPI
@@ -38,6 +39,7 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
+        [AuthenticationFilter("Admin")]
         public IActionResult InsertStudents([FromBody] Student student)
         {
             if (student == null)
