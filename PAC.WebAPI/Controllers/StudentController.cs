@@ -23,12 +23,13 @@ namespace PAC.WebAPI
         [HttpGet]
         public object GetAllStudents()
         {
-           return _studentLogic.GetStudents();
+            return _studentLogic.GetStudents();
         }
 
-        public object GetStudentById(int v)
+        [HttpGet("{id}")]
+        public object GetStudentById(int id)
         {
-            return _studentLogic.GetStudentById(v);
+            return _studentLogic.GetStudentById(id);
         }
     }
 }
