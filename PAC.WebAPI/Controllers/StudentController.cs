@@ -20,4 +20,17 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
     }
+
+    [HttpGet]
+    public ActionResult<List<UserDTO>> GetStudents()
+    {
+        result = _studentLogic.Students();
+
+        if (result != null)
+        {
+            return result;
+        }
+        return NotFound("No students found");
+    }
+
 }
