@@ -23,19 +23,28 @@ namespace PAC.WebAPI
         [HttpGet()]
         public ActionResult<List<Student>> GetStudents()
         {
-            throw new NotImplementedException();
+            return _studentLogic.GetStudents().ToList();
         }
 
         [HttpGet("{id}")]
         public ActionResult<Student> GetStudentById(int id)
         {
-            throw new NotImplementedException();
+            return _studentLogic.GetStudentById(id);
         }
 
         [HttpPost()]
         public ActionResult<Student> InsertStudents(Student student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _studentLogic.InsertStudents(student);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
+            return Ok();
         }
     }
 }
