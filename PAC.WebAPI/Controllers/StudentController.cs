@@ -20,9 +20,15 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
 
+        [HttpGet]
         public object GetAllStudents()
         {
            return _studentLogic.GetStudents();
+        }
+
+        public object GetStudentById(int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

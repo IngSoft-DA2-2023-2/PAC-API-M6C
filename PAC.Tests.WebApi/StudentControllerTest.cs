@@ -31,6 +31,24 @@ public class StudentControllerTest
 
             var controller = new StudentController(logic.Object);
             var result = controller.GetAllStudents();
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetStudentById()
+        {
+            List<Student> sutdients = new List<Student>() { new Student() };
+            var repo = new Mock<IStudentsRepository<Student>>();
+            repo.Setup(x => x.GetStudentById(It.IsAny<int>())).Returns(sutdients.First());
+            var logic = new Mock<IStudentLogic>();
+            logic.Setup(x => x.GetStudentById(It.IsAny<int>())).Callback((int id) => repo.Object.GetStudentById((int)id));
+
+            var controller = new StudentController(logic.Object);
+            var result = controller.GetStudentById(1);
+            Student saved = sutdients.First();
+
+            Assert.AreEqual(saved, result);
+
         }
     }
 }
