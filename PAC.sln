@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAC.Tests.WebApi", "PAC.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAC.WebAPI", "PAC.WebAPI\PAC.WebAPI.csproj", "{BD87850D-327F-420C-A3DD-0BDC28DD4C4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAuthFilter", "IAuthFilter\IAuthFilter.csproj", "{3A7DE145-2C60-4B4E-916A-AB37DF47F3DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthFilter", "AuthFilter\AuthFilter.csproj", "{7FA5AABC-7DF3-441F-B7DD-B8C95010592D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{BD87850D-327F-420C-A3DD-0BDC28DD4C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD87850D-327F-420C-A3DD-0BDC28DD4C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD87850D-327F-420C-A3DD-0BDC28DD4C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A7DE145-2C60-4B4E-916A-AB37DF47F3DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A7DE145-2C60-4B4E-916A-AB37DF47F3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A7DE145-2C60-4B4E-916A-AB37DF47F3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A7DE145-2C60-4B4E-916A-AB37DF47F3DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA5AABC-7DF3-441F-B7DD-B8C95010592D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA5AABC-7DF3-441F-B7DD-B8C95010592D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA5AABC-7DF3-441F-B7DD-B8C95010592D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA5AABC-7DF3-441F-B7DD-B8C95010592D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
