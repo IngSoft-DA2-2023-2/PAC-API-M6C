@@ -6,9 +6,15 @@ namespace PAC.WebAPI.Filters
 {
     public class AuthenticationFilter : Attribute, IAuthorizationFilter
     {
-        public virtual void OnAuthorization(AuthorizationFilterContext context)
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var authorizationHeader = context.HttpContext.Request.Headers[""].ToString();
+            
+            var userRole = context.HttpContext.Request.Headers["UserRole"].ToString();
+
+            if (string.IsNullOrEmpty(userRole) || userRole != "admin")
+            {
+                context.Result = new ForbidResult();
+            }
         }
 
     }

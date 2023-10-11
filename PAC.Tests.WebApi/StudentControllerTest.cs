@@ -4,6 +4,7 @@ using PAC.IBusinessLogic;
 using PAC.Domain;
 
 using PAC.WebAPI;
+using Microsoft.AspNetCore.Http;
 
 [TestClass]
 public class StudentControllerTest
@@ -63,18 +64,25 @@ public class StudentControllerTest
     [TestMethod]
     public void CreateStudentCorrectTest()
     {
-       
+
         var newStudent = new Student { Id = 2, Name = "Jane" };
         _mockStudentLogic.Setup(x => x.InsertStudents(newStudent));
 
-        
+        var contextMock = new Mock<HttpContext>();
+        var headers = new HeaderDictionary();
+        headers["UserRole"] = "admin";
+        contextMock.SetupGet(x => x.Request.Headers).Returns(headers);
+
+        _studentController.ControllerContext = new ControllerContext();
+        _studentController.ControllerContext.HttpContext = contextMock.Object;
+
         var result = _studentController.CreateStudent(newStudent);
 
-            
         var createdResult = result as CreatedAtActionResult;
         Assert.IsNotNull(createdResult);
         Assert.AreEqual(201, createdResult.StatusCode);
         var student = createdResult.Value as Student;
         Assert.AreEqual("Jane", student.Name);
     }
+
 }
