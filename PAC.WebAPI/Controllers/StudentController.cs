@@ -19,5 +19,12 @@ namespace PAC.WebAPI
         {
             this._studentLogic = studentLogic;
         }
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var students = _studentLogic.GetStudents();
+            return Ok(students);
+        }
+
     }
 }
