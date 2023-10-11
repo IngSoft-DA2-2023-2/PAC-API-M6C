@@ -33,8 +33,6 @@ namespace PAC.WebAPI
 
 
         [HttpGet("{id}")]
-        //[AuthorizationFilter]
-        //[ActionFilter("admin")]
         public IActionResult Get(int id)
         {
             var student = _studentLogic.GetStudentById(id);
@@ -42,6 +40,7 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
+        [AuthorizationFilter]
         public IActionResult Create(string name)
         {
             var student = new Student() { Name = name };
