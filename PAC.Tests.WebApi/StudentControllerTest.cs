@@ -29,7 +29,7 @@ public class StudentControllerTest
         {
             var repo = new Mock<IStudentsRepository<StudentLogic>>();
             //enumerable en lista es lo que devolveria el setUp
-            repo.Setup(x => x.GetStudents()).Returns();
+            //repo.Setup(x => x.GetStudents()).Returns();
             var logic = new Mock<IStudentLogic>();
             logic.Setup(x => x.GetStudents()).Returns(repo.Object.GetStudents());
 

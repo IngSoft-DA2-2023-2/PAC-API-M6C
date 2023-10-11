@@ -20,14 +20,19 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
 
+        [HttpGet]
         public IActionResult GetAllStudents()
         {
             return Ok(_studentLogic.GetStudents());
         }
 
-        public IActionResult GetStudentById(int studentId)
+        [HttpGet( "{id}")]
+
+        public object GetStudentById(int studentId)
         {
-            throw new NotImplementedException();
+            Student student = _studentLogic.GetStudentById(studentId);
+            if (student != null) return Ok(student);
+            else return NotFound("Student not found");
         }
     }
 }
