@@ -53,7 +53,7 @@ public class StudentControllerTest
             _studentLogicMock.Setup(x => x.GetStudentById(1)).Returns(student);
 
             // Act
-            var result = _studentController.Get(1) as OkObjectResult;
+            var result = _studentController.GetById(1) as OkObjectResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -69,7 +69,7 @@ public class StudentControllerTest
             _studentLogicMock.Setup(x => x.GetStudentById(1)).Returns((Student)null);
 
             // Act
-            var result = _studentController.Get(1) as NotFoundResult;
+            var result = _studentController.GetById(1) as NotFoundResult;
 
             // Assert
             Assert.IsNotNull(result);

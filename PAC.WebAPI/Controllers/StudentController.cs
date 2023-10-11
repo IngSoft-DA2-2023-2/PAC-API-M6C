@@ -28,7 +28,8 @@ namespace PAC.WebAPI
         }
 
         [HttpGet]
-        public IActionResult Get(int id)
+        [Route("all")]
+        public IActionResult GetById(int id)
         {
             Student student = _studentLogic.GetStudentById(id);
             if (student != null)
@@ -40,6 +41,7 @@ namespace PAC.WebAPI
 
         [HttpPost]
         [AuthenticationFilter]
+        [Route("{id}")]
         public IActionResult Post(Student student , [FromHeader] string authorizationHeader) 
         {
             try
