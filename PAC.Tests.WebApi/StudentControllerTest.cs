@@ -26,6 +26,19 @@ namespace Test.Controller
             Assert.IsNotNull(result);
             CollectionAssert.AreEqual(students, result.Value as List<Student>);
         }
+
+        [TestMethod]
+        public void GetStudentById_Ok()
+        {
+            var studentLogic = new Mock<IStudentLogic>();
+            studentLogic.Setup(sl => sl.GetStudentById(1)).Returns(_mockStudent1);
+
+            var studentController = new StudentController(studentLogic.Object);
+            var result = studentController.GetStudentById(1) as OkObjectResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(_mockStudent1, result.Value);
+        }
     }
 }
 
