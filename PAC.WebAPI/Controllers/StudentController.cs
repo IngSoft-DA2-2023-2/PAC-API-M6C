@@ -41,7 +41,8 @@ namespace PAC.WebAPI
         [HttpPost]
         public IActionResult InsertStudent(Student student)
         {
-            throw new NotImplementedException();
+            _studentLogic.InsertStudents(student);
+            return Ok();
         }
     }
 }
