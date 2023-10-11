@@ -39,6 +39,19 @@ namespace Test.Controller
             Assert.IsNotNull(result);
             Assert.AreEqual(_mockStudent1, result.Value);
         }
+        [TestMethod]
+        public void CreateStudent_Ok()
+        {
+            var newStudent = new Student { Name = "Carlos" };
+
+            var studentLogic = new Mock<IStudentLogic>();
+
+            var studentController = new StudentController(studentLogic.Object);
+            var result = studentController.InsertStudents(newStudent) as OkResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.StatusCode);
+        }
     }
 }
 
