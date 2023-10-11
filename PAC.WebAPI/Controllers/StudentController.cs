@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PAC.Domain;
 using PAC.IBusinessLogic;
+using PAC.WebAPI.Filters;
 
 namespace PAC.WebAPI
 {
@@ -33,7 +34,8 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
-        public IActionResult Post(Student student) 
+        [AuthenticationFilter]
+        public IActionResult Post(Student student , [FromHeader] string authorizationHeader) 
         {
             try
             {
