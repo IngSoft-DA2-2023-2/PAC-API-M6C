@@ -40,6 +40,24 @@ public class StudentControllerTest
 
             Assert.AreEqual(result, students);
         }
+
+
+        [TestMethod]
+        public void TestGetStudentOk()
+        {
+            Student studentToReturn = new Student()
+            {
+                Id = 1
+        };
+
+            _studentLogicMock.Setup(u => u.GetStudentById(It.IsAny<int>())).Returns(studentToReturn);
+            var result = _studentController.GetStudent(1);
+            _studentLogicMock.VerifyAll();
+            Assert.AreEqual(studentToReturn, result);
+
+
+        }
+
     }
 }
  

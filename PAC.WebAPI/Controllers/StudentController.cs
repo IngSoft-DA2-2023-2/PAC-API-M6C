@@ -27,6 +27,13 @@ namespace PAC.WebAPI
             return Ok(students);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetStudent(long id)
+        {
+            return null;
+
+        }
+
 
 
 
