@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using PAC.DataAccess;
 using PAC.Domain;
 using PAC.IBusinessLogic;
 
@@ -20,9 +21,17 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
 
-        public IEnumerable<Student> GetStudents()
+
+        [HttpGet]
+        public ObjectResult GetStudents()
         {
-            return _studentLogic.GetStudents();
+            IEnumerable<Student> students= _studentLogic.GetStudents();
+
+            return Ok(students);
+        }
+        public ObjectResult GetStudentById(int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
