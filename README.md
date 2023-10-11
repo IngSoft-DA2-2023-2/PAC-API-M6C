@@ -4,8 +4,6 @@ Tiene que tenerse en cuenta que esto va a ser realizado con TDD, es decir
 primero se realizan las pruebas unitarias correspondientes, hacen el 
 commit de las mismas y después la implementación de los requerimientos.
 
-Para entregar su trabajo tienen que hacer un Pull Request con su nombre, apellido y numero de estudiante
-
 ### Primer requerimiento
 
 Se tiene que desarrollar tres endpoints para los estudiantes en el cual se 
@@ -35,5 +33,4 @@ cambio corresponda.
 Las pruebas unitarias a realizarse en TDD solamente refieren a los 
 endpoints, aplicando los conceptos que se vieron en clase.
 
-#### Suerte!
-<img src="https://logos-world.net/wp-content/uploads/2021/08/Among-Us-Logo.png" alt="amogus"/>
+####Suerte!
