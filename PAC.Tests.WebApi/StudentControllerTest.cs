@@ -79,5 +79,22 @@ public class StudentControllerTest
             Assert.AreEqual(student2.Id, studentList[1].Id);
         }
 
+        [TestMethod]
+        public void CanCreateStudent_Ok()
+        {
+            var studentLogicMock = new Mock<IStudentLogic>();
+            var controller = new StudentController(studentLogicMock.Object);
+            var student = new Student()
+            {
+                Id = 45,
+                Name = "Pablo Emilio Escobar Gaviria",
+            };
+
+            var result = controller.Create(student) as OkResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.StatusCode);
+        }
+
     }
 }
