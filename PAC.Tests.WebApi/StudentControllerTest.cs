@@ -14,9 +14,25 @@ public class StudentControllerTest
     [TestClass]
     public class UsuarioControllerTest
     {
-        [TestInitialize]
-        public void InitTest()
+        [TestMethod]
+        public void CanGetAllUsers_Ok()
         {
+            var student = new Student()
+            {
+                Name = "Mateo"
+            };
+
+            var students = Enumerable.Repeat(student, 2).ToList();
+            
+            var studentService = new Mock<IStudentLogic>();
+            studentService.Setup(service => service.GetStudents()).Returns(students);
+
+            var studentController = new StudentController(studentService.Object);
+            
+            var result = studentController.GetStudents() as OkObjectResult;
+            var results = result.Value as List<Student>;
+
+            CollectionAssert.AreEqual(students, results);
         }
     }
 }
