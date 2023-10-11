@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json.Linq;
 
 namespace PAC.WebAPI.Filters
 {
@@ -13,7 +14,6 @@ namespace PAC.WebAPI.Filters
                 context.Result = new UnauthorizedResult();
             }
         }
-
     }
 }
 

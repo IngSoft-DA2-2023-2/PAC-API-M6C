@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PAC.Domain;
 using PAC.IBusinessLogic;
+using PAC.WebAPI.Filters;
 
 namespace PAC.WebAPI
 {
@@ -40,10 +42,10 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
-        [AuthorizationFilter]
-        public IActionResult Create(string name)
+        //[AuthorizationFilter]
+        public IActionResult Create(string name, int id)
         {
-            var student = new Student() { Name = name };
+            var student = new Student() { Name = name, Id = id };
             _studentLogic.InsertStudents(student);
             return Ok(student);
         }
