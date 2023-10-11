@@ -1,4 +1,9 @@
-﻿namespace PAC.Tests.WebApi;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace PAC.Tests.WebApi;
 using System.Collections.ObjectModel;
 
 using System.Data;
@@ -7,6 +12,7 @@ using PAC.IBusinessLogic;
 using PAC.Domain;
 using PAC.WebAPI;
 using Microsoft.AspNetCore.Mvc;
+using PAC.WebAPI.Filters;
 
 [TestClass]
 public class StudentControllerTest
@@ -72,6 +78,28 @@ public class StudentControllerTest
             var result = _controller.CreateStudent(_testStudent1);
             var createdResult = result as OkResult;
             Assert.AreEqual(createdResult.StatusCode, 200);
+        }
+
+        [TestMethod]
+        public void TestAuthFilterWithValidHeader()
+        {
+            AuthenticationFilter authFilter = new AuthenticationFilter();
+
+            var modelState = new ModelStateDictionary();
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["auth"] = "tokentolen";
+            var context = new AuthorizationFilterContext(
+                new ActionContext(httpContext: httpContext,
+                    routeData: new Microsoft.AspNetCore.Routing.RouteData(),
+                    actionDescriptor: new ActionDescriptor(),
+                    modelState: modelState),
+                new List<IFilterMetadata>());
+
+            authFilter.OnAuthorization(context);
+
+            ContentResult response = context.Result as ContentResult;
+
+            Assert.IsNull(response);
         }
     }
 }
