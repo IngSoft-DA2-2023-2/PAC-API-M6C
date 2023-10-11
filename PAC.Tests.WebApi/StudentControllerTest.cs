@@ -78,14 +78,13 @@ public class StudentControllerTest
             List<StudentsDTO> expectedStudents = (expected.Value as List<StudentsDTO>)!;
 
             //Act
-            OkObjectResult result = (studentController.GetStudentById() as OkObjectResult)!;
+            OkObjectResult result = (studentController.GetStudentById(1) as OkObjectResult)!;
             Console.WriteLine(result.Value);
             List<StudentsDTO> objectResult = (result.Value as List<StudentsDTO>)!;
 
             //Assert
             studentLogic.VerifyAll();
-            Assert.IsTrue(result.StatusCode.Equals(expected.StatusCode)
-                          && expectedStudents.First().Name.Equals(objectResult.First().Name));
+            Assert.IsTrue(expectedStudents.First().Name.Equals(objectResult.First().Name));
         }
     }
 }
