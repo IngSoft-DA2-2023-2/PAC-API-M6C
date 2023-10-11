@@ -29,10 +29,10 @@ public class StudentControllerTest
             students.Add(secondStudent);
 
             var studentServiceMock = new Mock<IStudentLogic>(MockBehavior.Strict);
-            studentServiceMock.Setup(s => s.Get()).Returns(students);
-            var stuentController = new StudentController(studentServiceMock.Object);
+            studentServiceMock.Setup(s => s.GetStudents()).Returns(students);
+            var studentController = new StudentController(studentServiceMock.Object);
 
-            var result = StudentController.Get();
+            var result = studentController.Get();
             var okResult = result as OkObjectResult;
             var value = okResult.Value;
             IEnumerable<Student> valueEnumerable = value as IEnumerable<Student>;
