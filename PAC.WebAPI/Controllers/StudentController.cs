@@ -20,9 +20,9 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
 
-        public object AddStudent(Student aStudent)
+        public void AddStudent(Student aStudent)
         {
-            throw new NotImplementedException();
+            _studentLogic.InsertStudents(aStudent);
         }
 
         [HttpGet]

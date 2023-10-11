@@ -61,7 +61,7 @@ public class StudentControllerTest
 
             var controller = new StudentController(logic.Object);
             Student aStudent = new Student();
-            var result = controller.AddStudent(aStudent);
+            controller.AddStudent(aStudent);
             Assert.IsTrue(sutdients.Count > 0);
         }
     }
