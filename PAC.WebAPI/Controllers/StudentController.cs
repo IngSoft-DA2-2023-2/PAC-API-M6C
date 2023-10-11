@@ -22,7 +22,6 @@ namespace PAC.WebAPI
         }
         [ProducesResponseType(typeof(Student), 200)]
         [ProducesResponseType(401)]
-        [HttpGet("{Id}", Name = "GetStudent")]
         public IActionResult Get()
         {
             var students = this._studentLogic.GetStudents();
@@ -34,6 +33,7 @@ namespace PAC.WebAPI
         }
         [ProducesResponseType(typeof(Student), 200)]
         [ProducesResponseType(401)]
+        [HttpGet("{Id}", Name = "GetStudent")]
         [HttpGet]
         public IActionResult Get(int id)
         {
