@@ -16,20 +16,28 @@ public class StudentControllerTest
     [TestClass]
     public class UsuarioControllerTest
     {
-        [TestMethod]
-        public void CanGetAllUsers_Ok()
+        private Student _student;
+        private Mock<IStudentLogic> _studentService;
+
+        [TestInitialize]
+        public void InitTest()
         {
-            var student = new Student()
+            _student  = new Student()
             {
                 Name = "Mateo"
             };
 
-            var students = Enumerable.Repeat(student, 2).ToList();
+            _studentService = new Mock<IStudentLogic>();
+        }
+        
+        [TestMethod]
+        public void CanGetAllUsers_Ok()
+        {
+            var students = Enumerable.Repeat(_student, 2).ToList();
             
-            var studentService = new Mock<IStudentLogic>();
-            studentService.Setup(service => service.GetStudents()).Returns(students);
+            _studentService.Setup(service => service.GetStudents()).Returns(students);
 
-            var studentController = new StudentController(studentService.Object);
+            var studentController = new StudentController(_studentService.Object);
             
             var result = studentController.GetStudents() as OkObjectResult;
             var results = result!.Value as List<Student>;
@@ -40,28 +48,21 @@ public class StudentControllerTest
         [TestMethod]
         public void CanGetUserById_Ok()
         {
-            var student = new Student()
-            {
-                Name = "Mateo"
-            };
+            _studentService.Setup(service => service.GetStudentById(It.IsAny<int>()))
+                .Returns(_student);
             
-            var studentService = new Mock<IStudentLogic>();
-            studentService.Setup(service => service.GetStudentById(It.IsAny<int>()))
-                .Returns(student);
-            
-            var studentController = new StudentController(studentService.Object);
+            var studentController = new StudentController(_studentService.Object);
 
             var result = studentController.GetStudentsById(1) as OkObjectResult;
             var studentResult = result!.Value as Student;
 
-            Assert.AreEqual(student, studentResult);
+            Assert.AreEqual(_student, studentResult);
         }
         
         [TestMethod]
         public void CanCreateStudent_Ok()
         {
-            var studentService = new Mock<IStudentLogic>();
-            var studentController = new StudentController(studentService.Object);
+            var studentController = new StudentController(_studentService.Object);
             var newStudent = new StudentCreateModel()
             {
                 Name = "Mate",
