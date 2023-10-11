@@ -35,10 +35,9 @@ public class StudentControllerTest
 
             _studentLogicMock.Setup(logic => logic.GetStudents()).Returns(students);
 
-            var result = _studentController.GetStudents() as ObjectResult;
+            var result = _studentController.GetStudents();
 
-            var returnedStudents = result.Value as IEnumerable<Student>;
-            Assert.AreEqual(students.Count(), returnedStudents.Count());
+            Assert.AreEqual(students.Count(), result.Count());
         }
     }
 }
