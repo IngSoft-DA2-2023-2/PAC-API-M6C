@@ -29,7 +29,7 @@ public class StudentsRepository<T> : IStudentsRepository<Student> where T : clas
 
     public IEnumerable<Student> GetStudents()
     {
-        return Entities.ToList();
+        return this.Entities.ToList();
     }
 
     public void InsertStudents(Student? student)
