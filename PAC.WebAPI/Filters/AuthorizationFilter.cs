@@ -6,9 +6,25 @@ namespace PAC.WebAPI.Filters
 {
     public class AuthenticationFilter : Attribute, IAuthorizationFilter
     {
-        public virtual void OnAuthorization(AuthorizationFilterContext context)
+        public virtual async void OnAuthorization(AuthorizationFilterContext context)
         {
-            var authorizationHeader = context.HttpContext.Request.Headers[""].ToString();
+            var authorizationHeader = context.HttpContext.Request.Headers["admin"].ToString();
+            if (authorizationHeader == null)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "No authorized"
+                };
+                return;
+            }
+
+            context.Result = new ContentResult()
+            {
+                StatusCode = 200,
+                Content = "Auth"
+            };
+            return;
         }
 
     }
