@@ -20,9 +20,9 @@ namespace PAC.WebAPI
             this._studentLogic = studentLogic;
         }
 
-        public ObjectResult GetStudents()
+        public IEnumerable<Student> GetStudents()
         {
-            throw new NotImplementedException();
+            return _studentLogic.GetStudents();
         }
     }
 }
