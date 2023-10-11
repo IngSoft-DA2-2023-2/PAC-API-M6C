@@ -33,8 +33,25 @@ public class StudentControllerTest
             var logic = new Mock<IStudentLogic>();
             logic.Setup(x => x.GetStudents()).Returns(repo.Object.GetStudents());
 
-            var userController = new StudentController(logic.Object);
-            var result = userController.GetAllStudents();
+            var studentController = new StudentController(logic.Object);
+            var result = studentController.GetAllStudents();
+
+            repo.VerifyAll();
+            logic.VerifyAll();
+
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void TestGetAStudent()
+        {
+            var repo = new Mock<IStudentsRepository<StudentLogic>>();
+            Student student = new Student();
+            repo.Setup(x => x.GetStudentById(It.IsAny<int>())).Returns(student);
+            var logic = new Mock<IStudentLogic>();
+            logic.Setup(x => x.GetStudentById(It.IsAny<int>())).Returns(repo.Object.GetStudentById(It.IsAny<int>()));
+
+            var studentController = new StudentController(logic.Object);
+            var result = studentController.GetStudentById(student.Id);
 
             repo.VerifyAll();
             logic.VerifyAll();
