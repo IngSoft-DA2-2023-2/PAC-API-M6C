@@ -8,8 +8,6 @@ using PAC.WebAPI;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 
-//using Microsoft.AspNetCore.Mvc;
-
 [TestClass]
 public class StudentControllerTest
 {

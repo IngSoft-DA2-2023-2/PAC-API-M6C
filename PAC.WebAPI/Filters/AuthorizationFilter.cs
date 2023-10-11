@@ -8,7 +8,18 @@ namespace PAC.WebAPI.Filters
     {
         public virtual void OnAuthorization(AuthorizationFilterContext context)
         {
-            var authorizationHeader = context.HttpContext.Request.Headers[""].ToString();
+            // Se asume que en el header encontramos el rol del usuario que realizo request
+            string header = context.HttpContext.Request.Headers["role"].ToString();
+            bool isAdmin = header.Equals("admin");
+            if (!isAdmin)
+            {
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 403,
+                    Content = "This action is exclusive to administrators"
+                };
+                return;
+            }
         }
 
     }

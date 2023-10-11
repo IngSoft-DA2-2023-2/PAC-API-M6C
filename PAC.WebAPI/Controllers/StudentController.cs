@@ -35,6 +35,7 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(AuthenticationFilter))]
         public void InsertStudents(Student? student)
         {
             _studentLogic.InsertStudents(student);
