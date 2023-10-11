@@ -9,11 +9,15 @@ namespace PAC.WebAPI.Filters
         public virtual void OnAuthorization(AuthorizationFilterContext context)
         {
             var authorizationHeader = context.HttpContext.Request.Headers["auth"].ToString();
-            context.Result = new ContentResult()
+            if (authorizationHeader == null)
             {
-                StatusCode = 401,
-                Content = "Auth token is null"
-            };
+                context.Result = new ContentResult()
+                {
+                    StatusCode = 401,
+                    Content = "Auth token is null"
+                };
+                return;
+            }
         }
 
     }
