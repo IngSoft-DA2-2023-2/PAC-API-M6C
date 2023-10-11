@@ -29,9 +29,13 @@ namespace PAC.WebAPI
 
             return Ok(students);
         }
-        public ObjectResult GetStudentById(int v)
+
+        [HttpGet("{id}")]
+        public ObjectResult GetStudentById(int id)
         {
-            throw new NotImplementedException();
+            Student student = _studentLogic.GetStudentById(id);
+
+            return Ok(student);
         }
     }
 }
