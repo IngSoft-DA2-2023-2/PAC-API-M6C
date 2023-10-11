@@ -7,6 +7,8 @@ using PAC.IBusinessLogic;
 using PAC.Domain;
 using PAC.WebAPI;
 using Microsoft.AspNetCore.Mvc;
+using PAC.BusinessLogic;
+using PAC.DataAccess;
 
 [TestClass]
 public class StudentControllerTest
@@ -17,6 +19,14 @@ public class StudentControllerTest
         [TestInitialize]
         public void InitTest()
         {
+        }
+
+        [TestMethod]
+        public void CanCreateController_Ok()
+        {
+            var studentLogicMock = new Mock<IStudentLogic>();
+            StudentController controller = new StudentController(studentLogicMock.Object);
+            Assert.IsNotNull(controller);
         }
     }
 }
