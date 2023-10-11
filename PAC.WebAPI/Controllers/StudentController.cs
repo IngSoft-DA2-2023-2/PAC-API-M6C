@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PAC.Domain;
 using PAC.IBusinessLogic;
+using PAC.WebAPI.Filters;
 
 namespace PAC.WebAPI
 {
@@ -18,6 +19,39 @@ namespace PAC.WebAPI
         public StudentController(IStudentLogic studentLogic)
         {
             this._studentLogic = studentLogic;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_studentLogic.GetStudents());
+        }
+
+        [HttpGet]
+        [Route("all")]
+        public IActionResult GetById(int id)
+        {
+            Student student = _studentLogic.GetStudentById(id);
+            if (student != null)
+            {
+                return Ok(student);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [AuthenticationFilter]
+        [Route("{id}")]
+        public IActionResult Post(Student student , [FromHeader] string authorizationHeader) 
+        {
+            try
+            {
+                _studentLogic.InsertStudents(student);
+                return Ok("Estudiante creado");
+            }catch (Exception ex)
+            { 
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
