@@ -23,7 +23,7 @@ namespace PAC.WebAPI
 
 
         [HttpGet]
-        public ObjectResult GetStudents()
+        public IActionResult GetStudents()
         {
             IEnumerable<Student> students= _studentLogic.GetStudents();
 
@@ -31,11 +31,17 @@ namespace PAC.WebAPI
         }
 
         [HttpGet("{id}")]
-        public ObjectResult GetStudentById(int id)
+        public IActionResult GetStudentById(int id)
         {
             Student student = _studentLogic.GetStudentById(id);
 
             return Ok(student);
+        }
+
+        [HttpPost]
+        public IActionResult InsertStudent(Student student)
+        {
+            throw new NotImplementedException();
         }
     }
 }

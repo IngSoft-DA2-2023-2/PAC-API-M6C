@@ -60,5 +60,23 @@ public class StudentControllerTest
             _studentLogicMock.VerifyAll();
             Assert.IsTrue(student.Id == 1);
         }
+
+        [TestMethod]
+        public void TestCreateStudentOk()
+        {
+            Student student = new()
+            {
+                Name = "Joselito"
+            };
+
+            _studentLogicMock.Setup(u => u.InsertStudents(student));
+
+            var result = _studentController.InsertStudent(student);
+            var createdResult = result as OkResult;
+
+            _studentLogicMock.VerifyAll();
+            _studentLogicMock.Verify(x => x.InsertStudents(student), Times.Once);
+            Assert.IsTrue(200 == createdResult.StatusCode);
+        }
     }
 }
