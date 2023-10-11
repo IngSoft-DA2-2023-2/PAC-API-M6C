@@ -19,5 +19,10 @@ namespace PAC.WebAPI
         {
             this._studentLogic = studentLogic;
         }
+
+        public ObjectResult GetStudents()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
