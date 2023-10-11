@@ -32,5 +32,12 @@ namespace PAC.WebAPI
             StudentsDTO studentResponseModel = new StudentsDTO(_studentLogic.GetStudentById(id));
             return Ok(studentResponseModel);
         }
+
+        [HttpPost]
+        public IActionResult InsertStudent([FromBody] StudentCreateModel student)
+        {
+            _studentLogic.InsertStudents(student.ToEntity());
+            return Ok();
+        }
     }
 }
