@@ -7,6 +7,8 @@ namespace PAC.DataAccess
     {
         public PacContext() { }
         public PacContext(DbContextOptions options) : base(options) { }
+        
+        public virtual DbSet<Student>? Students { get; set; }   
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){}
 
