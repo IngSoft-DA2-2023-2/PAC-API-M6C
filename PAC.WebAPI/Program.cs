@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using PAC.BusinessLogic;
 using PAC.DataAccess;
 using PAC.Domain;
@@ -25,9 +27,35 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+builder.Services.AddAuthentication(options =>
+{
+}).AddJwtBearer(jwtOptions =>
+{
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireClaim("admin", "true"));
+});
+
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
 app.Run();
+
+public class JwtBearerDefaults
+{
+}
