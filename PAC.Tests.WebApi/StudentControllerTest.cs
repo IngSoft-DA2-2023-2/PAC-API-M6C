@@ -84,7 +84,41 @@ public class StudentControllerTest
 
             //Assert
             studentLogic.VerifyAll();
-            Assert.IsTrue(expectedStudents.First().Name.Equals(objectResult.First().Name));
+            Assert.IsTrue(result.StatusCode.Equals(expected.StatusCode)
+                          && expectedStudents.First().Name.Equals(objectResult.First().Name));
+        }
+
+        [TestMethod]
+        public void InsertStudents()
+        {
+            //Arrange
+            Student student = new Student()
+            {
+                Id = 1,
+                Name = "test"
+            };
+
+            IEnumerable<Student> students = new List<Student>()
+            {
+                student
+            };
+
+            Mock<IStudentLogic> studentLogic = new Mock<IStudentLogic>();
+            studentLogic.Setup(x => x.GetStudents()).Returns(students);
+
+            StudentController studentController = new StudentController(studentLogic.Object);
+            OkObjectResult expected = new OkObjectResult(new List<StudentsDTO>()
+            {
+                new StudentsDTO(students.First())
+            });
+
+            List<StudentsDTO> expectedStudents = (expected.Value as List<StudentsDTO>)!;
+
+            //Act
+            studentController.InsertStudent(student!);
+
+            //Assert
+            studentLogic.VerifyAll();
         }
     }
 }
