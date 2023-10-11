@@ -23,7 +23,8 @@ namespace PAC.WebAPI
       [HttpGet]
       public IActionResult Students()
         {
-            return null;
+            var students =  _studentLogic.GetStudents();
+            return Ok(students);
         }
 
 
