@@ -14,9 +14,26 @@ public class StudentControllerTest
     [TestClass]
     public class UsuarioControllerTest
     {
+        IStudentLogic studentLogicMock;
+        Studentcontroller controller;
+          
         [TestInitialize]
         public void InitTest()
         {
+            studentLogicMock = new Mock<StudentLogic>();
+            controller = new StudentController(studentLogicMock);
         }
+
+        [TestMethod]
+        public void getStudents()
+        {
+            IActionResult result = controller.getStudents();
+            var okResult = result as OkObjectResult;
+            var modelOut = okResult.Value as IEnumerable<Student>;
+
+            Assert.AreEqual(200, okResult.StatusCode);
+            Assert.IsNotNull(modelOut);
+        }
+
     }
 }
