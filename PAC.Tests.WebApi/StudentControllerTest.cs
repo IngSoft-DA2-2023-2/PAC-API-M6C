@@ -1,4 +1,6 @@
-﻿namespace PAC.Tests.WebApi;
+﻿using PAC.WebAPI.Models;
+
+namespace PAC.Tests.WebApi;
 using System.Collections.ObjectModel;
 
 using System.Data;
@@ -53,6 +55,21 @@ public class StudentControllerTest
             var studentResult = result!.Value as Student;
 
             Assert.AreEqual(student, studentResult);
+        }
+        
+        [TestMethod]
+        public void CanCreateStudent_Ok()
+        {
+            var studentService = new Mock<IStudentLogic>();
+            var studentController = new StudentController(studentService.Object);
+            var newStudent = new StudentCreateModel()
+            {
+                Name = "Mate",
+            };
+
+            var result = studentController.InsertStudent(newStudent) as OkResult;
+
+            Assert.AreEqual(200, result!.StatusCode);
         }
     }
 }
