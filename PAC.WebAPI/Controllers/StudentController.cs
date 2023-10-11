@@ -22,7 +22,7 @@ namespace PAC.WebAPI
 
         public IActionResult GetAllStudents()
         {
-            throw new NotImplementedException();
+            return Ok(_studentLogic.GetStudents());
         }
     }
 }
