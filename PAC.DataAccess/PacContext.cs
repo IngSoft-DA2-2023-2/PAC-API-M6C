@@ -14,6 +14,8 @@ namespace PAC.DataAccess
         {
             optionsBuilder.UseSqlServer(@"Server = 127.0.0.1; Database = starwarsdb; User Id = sa; Password = MyPass@word; TrustServerCertificate=True;");
         }
+
+        public DbSet<Student> StudentEntities { get; set; }
     }
 }
 
