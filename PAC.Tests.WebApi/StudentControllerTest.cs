@@ -14,7 +14,7 @@ public class StudentControllerTest
     [TestClass]
     public class UsuarioControllerTest
     {
-        [TestInitialize]
+        [TestMethod]
         public void GetAllStudents()
         {
             //Arrange
@@ -33,17 +33,17 @@ public class StudentControllerTest
             studentLogic.Setup(x => x.GetStudents()).Returns(students);
 
             StudentController studentController = new StudentController(studentLogic.Object);
-            OkObjectResult expected = new OkObjectResult(new List<Student>()
+            OkObjectResult expected = new OkObjectResult(new List<StudentsDTO>()
             {
-                students.First()
+                new StudentsDTO(students.First())
             });
 
-            List<Student> expectedStudents = (expected.Value as List<Student>)!;
+            List<StudentsDTO> expectedStudents = (expected.Value as List<StudentsDTO>)!;
 
             //Act
             OkObjectResult result = (studentController.GetStudents() as OkObjectResult)!;
             Console.WriteLine(result.Value);
-            List<Student> objectResult = (result.Value as List<Student>)!;
+            List<StudentsDTO> objectResult = (result.Value as List<StudentsDTO>)!;
 
             //Assert
             studentLogic.VerifyAll();
