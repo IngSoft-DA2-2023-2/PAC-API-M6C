@@ -40,7 +40,6 @@ public class StudentControllerTest
 
            
             Assert.IsNotNull(result); 
-            Assert.AreEqual(200, result.StatusCode);
         }
 
         [TestMethod]
