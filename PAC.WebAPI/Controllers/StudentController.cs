@@ -28,7 +28,7 @@ namespace PAC.WebAPI
 
         public object GetStudentById(int v)
         {
-            throw new NotImplementedException();
+            return _studentLogic.GetStudentById(v);
         }
     }
 }
