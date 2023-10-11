@@ -22,7 +22,7 @@ namespace PAC.WebAPI
         }
         [ProducesResponseType(typeof(Student), 200)]
         [ProducesResponseType(401)]
-        [HttpGet]
+        [HttpGet("{Id}", Name = "GetStudent")]
         public IActionResult Get()
         {
             var students = this._studentLogic.GetStudents();
@@ -43,6 +43,15 @@ namespace PAC.WebAPI
                 return NotFound("No existe el estudiante con Id: " + id);
             }
             return Ok(student);
+        }
+        [ProducesResponseType(typeof(Student), 201)]
+        [ProducesResponseType(401)]
+        [HttpPost()]
+        public IActionResult Post([FromBody] Student oneStudent)
+        {
+
+            this._studentLogic.InsertStudents(oneStudent);
+            return CreatedAtRoute("GetStudent", new { id = oneStudent.Id }, oneStudent);
         }
     }
 }
