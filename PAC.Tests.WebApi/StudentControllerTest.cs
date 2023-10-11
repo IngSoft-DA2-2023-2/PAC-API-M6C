@@ -58,5 +58,26 @@ public class StudentControllerTest
 
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void TestCreateAStudent()
+        {
+            var repo = new Mock<IStudentsRepository<StudentLogic>>();
+            var student = new Student();
+            List<Student> students = new List<Student>() { student };
+            repo.Setup(x => x.InsertStudents(It.IsAny<Student>())).Callback((Student newStudent) => students.Add(newStudent));
+            var logic = new Mock<IStudentLogic>();
+            logic.Setup(x => x.InsertStudents(It.IsAny<Student>())).Callback((Student newStudent) => repo.Object.InsertStudents(newStudent));
+
+            var studentController = new StudentController(logic.Object);
+
+            IActionResult result = studentController.InsertStudent(student);
+
+            repo.VerifyAll();
+            logic.VerifyAll();
+
+            Assert.AreEqual(result.GetType(), typeof(OkResult));
+
+        }
     }
 }

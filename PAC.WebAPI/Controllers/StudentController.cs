@@ -34,5 +34,10 @@ namespace PAC.WebAPI
             if (student != null) return Ok(student);
             else return NotFound("Student not found");
         }
+
+        public IActionResult InsertStudent(Student student)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
