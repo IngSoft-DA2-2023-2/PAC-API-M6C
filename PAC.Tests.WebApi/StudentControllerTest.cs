@@ -46,7 +46,10 @@ public class StudentControllerTest
             var result = _controller.GetAllStudents();
 
             var createdResult = result as ActionResult<List<Student>>;
-            Assert.AreEqual(expectedStudents, createdResult.Value);
+            for (int i = 0; i < expectedStudents.Count; i++)
+            {
+                Assert.AreEqual(expectedStudents[i], createdResult.Value[i]);
+            }
         }
 
         [TestMethod]
