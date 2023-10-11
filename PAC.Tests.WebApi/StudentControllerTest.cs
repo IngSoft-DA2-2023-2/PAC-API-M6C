@@ -30,9 +30,29 @@ public class StudentControllerTest
             var studentController = new StudentController(studentService.Object);
             
             var result = studentController.GetStudents() as OkObjectResult;
-            var results = result.Value as List<Student>;
+            var results = result!.Value as List<Student>;
 
             CollectionAssert.AreEqual(students, results);
+        }
+        
+        [TestMethod]
+        public void CanGetUserById_Ok()
+        {
+            var student = new Student()
+            {
+                Name = "Mateo"
+            };
+            
+            var studentService = new Mock<IStudentLogic>();
+            studentService.Setup(service => service.GetStudentById(It.IsAny<int>()))
+                .Returns(student);
+            
+            var studentController = new StudentController(studentService.Object);
+
+            var result = studentController.GetStudentsById(1) as OkObjectResult;
+            var studentResult = result!.Value as Student;
+
+            Assert.AreEqual(student, studentResult);
         }
     }
 }
