@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using PAC.BusinessLogic;
 using PAC.Domain;
 using PAC.IBusinessLogic;
+using System.Collections.Generic;
 
 namespace PAC.WebAPI
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
         private readonly IStudentLogic _studentLogic;
 
         public StudentController(IStudentLogic studentLogic)
         {
-            this._studentLogic = studentLogic;
+            _studentLogic = studentLogic;
         }
 
-        public OkObjectResult GetStudents()
+        [HttpGet]
+        public IActionResult GetStudents()
         {
-            throw new NotImplementedException();
+            var students = _studentLogic.GetStudents();
+            return Ok(students);
         }
     }
 }
+
