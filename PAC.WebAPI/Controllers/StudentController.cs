@@ -46,6 +46,7 @@ namespace PAC.WebAPI
         }
         [ProducesResponseType(typeof(Student), 201)]
         [ProducesResponseType(401)]
+        [AuthenticationFilter("Admin")]
         [HttpPost()]
         public IActionResult Post([FromBody] Student oneStudent)
         {
