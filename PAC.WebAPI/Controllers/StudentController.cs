@@ -30,7 +30,12 @@ namespace PAC.WebAPI
         [HttpGet]
         public IActionResult Get(int id)
         {
-            return Ok(_studentLogic.GetStudentById(id));
+            Student student = _studentLogic.GetStudentById(id);
+            if (student != null)
+            {
+                return Ok(student);
+            }
+            return NotFound();
         }
 
         [HttpPost]
