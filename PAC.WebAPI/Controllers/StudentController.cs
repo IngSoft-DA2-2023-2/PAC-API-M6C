@@ -35,7 +35,8 @@ namespace PAC.WebAPI
         }
 
        [HttpPost]
-       public IActionResult Students(Student student)
+       [AuthenticationRequired]
+        public IActionResult Students(Student student)
         {
             _studentLogic.InsertStudents(student);
             return Ok();
