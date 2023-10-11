@@ -19,5 +19,26 @@ namespace PAC.WebAPI
         {
             this._studentLogic = studentLogic;
         }
+
+        [HttpGet("student-list")]
+        public IActionResult GetStudents()
+        {
+            IEnumerable<Student> result = _studentLogic.GetStudents();
+            return Ok(result);
+        }
+
+        [HttpGet("student-by-id")]
+        public IActionResult GetStudentById([FromQuery] int id)
+        {
+            Student result = _studentLogic.GetStudentById(id);
+            return Ok(result);
+        }
+
+        [HttpPost("new-student")]
+        public IActionResult NewStudent([FromBody] Student student)
+        {
+            _studentLogic.InsertStudents(student);
+            return Ok();
+        }
     }
 }
