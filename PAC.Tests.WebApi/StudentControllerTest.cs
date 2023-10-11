@@ -9,6 +9,7 @@ using PAC.WebAPI;
 using Microsoft.AspNetCore.Mvc;
 using PAC.IDataAccess;
 using PAC.BusinessLogic;
+using Microsoft.AspNetCore.Http;
 
 [TestClass]
 public class StudentControllerTest
@@ -61,6 +62,13 @@ public class StudentControllerTest
         [TestMethod]
         public void InsertStudents()
         {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["rol"] = "admin";
+            studentController.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
             var student = new Student()
             {
                 Id = 2,
