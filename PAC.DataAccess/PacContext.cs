@@ -5,6 +5,7 @@ namespace PAC.DataAccess
 {
 	public class PacContext : DbContext
     {
+        public DbSet<Student> Students { get; set; }
         public PacContext() { }
         public PacContext(DbContextOptions options) : base(options) { }
 
