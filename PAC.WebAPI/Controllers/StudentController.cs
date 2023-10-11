@@ -32,5 +32,17 @@ namespace PAC.WebAPI
             }
             return NotFound("No hay estudiantes en el sistema.");
         }
+        [ProducesResponseType(typeof(Student), 200)]
+        [ProducesResponseType(401)]
+        [HttpGet]
+        public IActionResult Get(int id)
+        {
+            var student = this._studentLogic.GetStudentById(id);
+            if (student == null)
+            {
+                return NotFound("No existe el estudiante con Id: " + id);
+            }
+            return Ok(student);
+        }
     }
 }
