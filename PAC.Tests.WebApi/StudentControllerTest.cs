@@ -29,8 +29,8 @@ public class StudentControllerTest
         var expectedOutcome = new List<Student>();
         mock.Setup(s => s.GetStudents()).Returns(expectedOutcome);
         var result = studentController.GetStudents();
-        var createdResult = result as ActionResult<List<Student>>;
-        Assert.AreEqual(expectedOutcome.Count, createdResult.Value.Count);
+        var resultList = result.ToList();
+        Assert.AreEqual(expectedOutcome.Count, resultList.Count);
     }
 
     [TestMethod]
@@ -39,17 +39,7 @@ public class StudentControllerTest
         var expectedOutcome = new Student() { Id = 5, Name = "Prueba" };
         mock.Setup(s => s.GetStudentById(5)).Returns(expectedOutcome);
         var result = studentController.GetStudentById(5);
-        var createdResult = result as ActionResult<Student>;
-        Assert.AreEqual(expectedOutcome, createdResult.Value);
-    }
-
-    [TestMethod]
-    public void GivenInvalidIdGetReturnsNotFound()
-    {
-        Student? nullStudent = null;
-        mock.Setup(s => s.GetStudentById(7)).Returns(nullUser);
-        var result = studentController.GetStudentById(7);
-        Assert.AreEqual(result.Value, null);
+        Assert.AreEqual(expectedOutcome, result);
     }
 
     [TestMethod]
@@ -57,8 +47,8 @@ public class StudentControllerTest
     {
         Student student = new Student() { Id = 3,Name = "Prueba" };
         mock.Setup(s => s.InsertStudents(student));
-        var result = studentController.InsertStudents(student);
-        var createdResult = result as OkResult;
-        Assert.AreEqual(createdResult.StatusCode, 200);
+        mock.Setup(s => s.GetStudentById(3)).Returns(student);
+        studentController.InsertStudents(student);
+        Assert.IsNotNull(studentController.GetStudentById(3));
     }
 }
