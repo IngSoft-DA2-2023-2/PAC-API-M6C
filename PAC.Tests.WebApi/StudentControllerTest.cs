@@ -15,8 +15,40 @@ public class StudentControllerTest
     public class UsuarioControllerTest
     {
         [TestInitialize]
-        public void InitTest()
+        public void GetAllStudents()
         {
+            //Arrange
+            Student student = new Student()
+            {
+                Id = 1,
+                Name = "test"
+            };
+
+            IEnumerable<Student> students = new List<Student>()
+            {
+                student
+            };
+
+            Mock<IStudentLogic> studentLogic = new Mock<IStudentLogic>();
+            studentLogic.Setup(x => x.GetStudents()).Returns(students);
+
+            StudentController studentController = new StudentController(studentLogic.Object);
+            OkObjectResult expected = new OkObjectResult(new List<Student>()
+            {
+                students.First()
+            });
+
+            List<Student> expectedStudents = (expected.Value as List<Student>)!;
+
+            //Act
+            OkObjectResult result = (studentController.GetStudents() as OkObjectResult)!;
+            Console.WriteLine(result.Value);
+            List<Student> objectResult = (result.Value as List<Student>)!;
+
+            //Assert
+            studentLogic.VerifyAll();
+            Assert.IsTrue(result.StatusCode.Equals(expected.StatusCode)
+                && expectedStudents.First().Name.Equals(objectResult.First().Name));
         }
     }
 }
