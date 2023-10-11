@@ -28,5 +28,27 @@ public class StudentControllerTest
             StudentController controller = new StudentController(studentLogicMock.Object);
             Assert.IsNotNull(controller);
         }
+
+        [TestMethod]
+        public void CanGetAllStudents()
+        {
+            var studentLogicMock = new Mock<IStudentLogic>();
+            var studentList = new List<Student>
+            {
+                new Student() { Id = 1, Name = "Pablo" },
+                new Student() { Id = 2, Name = "Julieta" },
+                new Student() { Id = 3, Name = "Felipe" }
+            };
+            studentLogicMock.Setup(service => service.GetStudents()).Returns(studentList);
+            StudentController controller = new StudentController(studentLogicMock.Object);
+
+
+            var result = controller.GetAll() as OkObjectResult;
+            var students = result.Value as List<Student>;
+
+            Assert.AreEqual(students.Count, 3);
+            CollectionAssert.Contains(students, studentList[0]);
+        }
+
     }
 }
